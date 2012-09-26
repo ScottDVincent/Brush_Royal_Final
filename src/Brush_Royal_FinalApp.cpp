@@ -11,6 +11,19 @@
 * 
 */
 
+/**
+SV: Overal Project Thoughts.
+Two things struck me when reviewing this projects.
+First, the use of a struct vs. a class for the Node object. I even asked a question in class 
+about using a struct and the professors's opinion was that an class would make a better choice.
+The use of the struct in this project caused errors in the actual creation of each Node object
+as witnessed in the debugging.docx file I attached with the proj.
+
+Second, the the decision to store an integer into the Node object va. an actual shabe object.
+While the use of a data int provides results for the code written the decision would not be a good general 
+practice nor would it scale well beyond the scope of this assignment.
+*/
+
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
@@ -84,7 +97,7 @@ void Brush_Royal_Final::keyDown(KeyEvent event){
 	else if(event.getChar() == 'c'){
 		list->cycle();
 	}
-	else if(event.getChar() == '/'){	// changed this to a '/' in case a user forgets to use the shift to get to the '?' character
+	else if(event.getChar() == '/'){		//SV: changed this to a '/' in case a user forgets to use the shift to get to the '?' character
 		if(help == false)
 		help = true;
 		else help = false;
