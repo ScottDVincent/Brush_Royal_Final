@@ -84,7 +84,7 @@ void Brush_Royal_Final::keyDown(KeyEvent event){
 	else if(event.getChar() == 'c'){
 		list->cycle();
 	}
-	else if(event.getChar() == '?'){
+	else if(event.getChar() == '/'){	// changed this to a '/' in case a user forgets to use the shift to get to the '?' character
 		if(help == false)
 		help = true;
 		else help = false;
@@ -119,8 +119,9 @@ void Brush_Royal_Final::draw()
 	//gl::clear( Color( 0, 0, 0 ) );
 	gl::draw(*mySurface_);
 	int data;
-	for(int i = 0; i < 5; i++){
-		//can't get getData() to work!!!
+	//for(int i = 0; i < 5; i++){  
+    for(int i = 1; i < 5; i++){				//SV: since the data elements start at 1 I changed this loop to reflecct that.
+		//can't get getData() to work!!!	//SV: see the word doc for debugging hints on this issue
 		data = list->getData(i);
 		if(data == 1){
 			gl::color(Color(0,0,1));

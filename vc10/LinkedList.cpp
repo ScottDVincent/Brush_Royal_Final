@@ -1,3 +1,16 @@
+/** 
+* @file LinkedList.cpp
+* 
+* @author Adam Brush
+* @date 2012-09-23
+* 
+* @note This file is (c) 2012. It is licensed under the
+* CC BY 3.0 licenses (http://creativecommons.org/licenses/by/3.0/),
+* which means you are free to use, share, and remix it as long as you
+* give attribution. Commercial uses are allowed.
+* 
+*/
+
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
 #include "Resources.h"
@@ -23,6 +36,8 @@ LinkedList::LinkedList(){
 * 
 * Idea for addNode came from:
 * http://www.dreamincode.net/forums/topic/251223-circular-double-linked-list-insert-method-problem/
+*
+* @param info
 */
 void LinkedList::addNode(int info){
 	if( head_==NULL ) {
@@ -40,6 +55,9 @@ void LinkedList::addNode(int info){
 * Finds the data point (type int) of the node at that index
 * in the list.  Not quite working right yet.  Only returns 1, 2, or 4.
 * 
+* SV review: see my word document on the debugging of this issue.
+*
+* @param index
 */
 int LinkedList::getData(int index){
 	int i = 0;
@@ -49,7 +67,11 @@ int LinkedList::getData(int index){
 		pointer = pointer->next;
 		i++;
 	}
-	return pointer->next->data;
+	return pointer->next->data;		// have to cycle thru the elements to see the occlusion
+
+
+	//return pointer->data;			// causes all the elements to be drawn on screen at once
+									// but the reverse will on flip the background
 }
 
 /*
@@ -86,7 +108,7 @@ void LinkedList::cycle(){
 * because it has to loop through the list each time (wastes memory)
 * 
 * This code was based off of Dr. Brinkman's
-* class lecture on how to implement reverse for singly and doubly linke lists
+* class lecture on how to implement reverse for singly and doubly linked lists
 */
 void LinkedList::reverse(){
 	Node* current = head_;
@@ -94,7 +116,7 @@ void LinkedList::reverse(){
 		Node* temp = current->next;
 		current->next=current->prev;
 		current->prev=temp;
-		current = current->prev;
+		current = current->prev;	
 	}
 	while(current != head_);
 	//Not sure why reverse isn't working, I think it still has something to do with the getData
